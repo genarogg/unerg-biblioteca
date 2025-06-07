@@ -7,6 +7,7 @@ import Title from "./Title";
 import SideBar from "./sidebar";
 
 import Nav from "@components/layout/nav/Nav";
+import { useAuth } from "@context/AuthContext";
 
 interface HeaderProps {
     children?: React.ReactNode;
@@ -14,6 +15,8 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = () => {
+
+    const { state: { isAuthenticated } } = useAuth();
 
     const btnRemove = () => {
         console.log("btnRemove");
@@ -27,9 +30,22 @@ const Header: React.FC<HeaderProps> = () => {
     }
 
     const menuItems = [
-        { href: "#inicio", label: "Inicio" },
-        { href: "#servicios", label: "Servicios" },
+        { href: "/", label: "Inicio" },
     ];
+
+    if (isAuthenticated) {
+        menuItems.push(
+            { href: "/dashboard", label: "Dashboard" },
+            { href: "/profile", label: "Perfil" },
+            { href: "/", label: "Salir" }
+        );
+    }
+    else{
+        menuItems.push(
+            { href: "/login", label: "login" }
+        );
+    }
+
 
 
     return (

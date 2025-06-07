@@ -9,7 +9,7 @@ interface homeProps {
 const home: React.FC<homeProps> = () => {
     return (
         <Layout>
-            <p>hola</p>
+            <p>inicio</p>
         </Layout>
     );
 }

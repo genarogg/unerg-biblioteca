@@ -1,11 +1,12 @@
 "use client"
 
 import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
-import { useRouter } from 'next/router';
+
 
 // Tipos para el estado de autenticación
 interface AuthState {
     token: string;
+    rol: string;
     loading: boolean;
     isAuthenticated: boolean;
 }
@@ -13,11 +14,11 @@ interface AuthState {
 // Tipos para las acciones del reducer
 type AuthAction =
     | { type: 'LOGIN_START' }
-    | { type: 'LOGIN_SUCCESS'; payload: { token: string } }
+    | { type: 'LOGIN_SUCCESS'; payload: { token: string; rol: string } }
     | { type: 'LOGIN_FAILURE' }
     | { type: 'LOGOUT' }
     | { type: 'SET_LOADING'; payload: boolean }
-    | { type: 'VERIFY_TOKEN_SUCCESS' }
+    | { type: 'VERIFY_TOKEN_SUCCESS'; payload?: { rol: string } }
     | { type: 'VERIFY_TOKEN_FAILURE' };
 
 // Función para verificar si localStorage está disponible
@@ -37,10 +38,25 @@ const getTokenFromStorage = (): string => {
     return '';
 };
 
+// Función para obtener rol desde localStorage
+const getRolFromStorage = (): string => {
+    if (isLocalStorageAvailable()) {
+        return localStorage.getItem('user_rol') || '';
+    }
+    return '';
+};
+
 // Función para guardar token en localStorage
 const saveTokenToStorage = (token: string): void => {
     if (isLocalStorageAvailable()) {
         localStorage.setItem('auth_token', token);
+    }
+};
+
+// Función para guardar rol en localStorage
+const saveRolToStorage = (rol: string): void => {
+    if (isLocalStorageAvailable()) {
+        localStorage.setItem('user_rol', rol);
     }
 };
 
@@ -51,9 +67,17 @@ const removeTokenFromStorage = (): void => {
     }
 };
 
-// Estado inicial - obtiene el token desde localStorage si está disponible
+// Función para eliminar rol de localStorage
+const removeRolFromStorage = (): void => {
+    if (isLocalStorageAvailable()) {
+        localStorage.removeItem('user_rol');
+    }
+};
+
+// Estado inicial - obtiene el token y rol desde localStorage si está disponible
 const initialState: AuthState = {
     token: '',
+    rol: '',
     loading: true,
     isAuthenticated: false,
 };
@@ -68,31 +92,37 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
             };
 
         case 'LOGIN_SUCCESS':
-            // Guardar token en localStorage
+            // Guardar token y rol en localStorage
             saveTokenToStorage(action.payload.token);
+            saveRolToStorage(action.payload.rol);
             return {
                 ...state,
                 token: action.payload.token,
+                rol: action.payload.rol,
                 loading: false,
                 isAuthenticated: true,
             };
 
         case 'LOGIN_FAILURE':
-            // Eliminar token de localStorage en caso de fallo
+            // Eliminar token y rol de localStorage en caso de fallo
             removeTokenFromStorage();
+            removeRolFromStorage();
             return {
                 ...state,
                 token: '',
+                rol: '',
                 loading: false,
                 isAuthenticated: false,
             };
 
         case 'LOGOUT':
-            // Eliminar token de localStorage al cerrar sesión
+            // Eliminar token y rol de localStorage al cerrar sesión
             removeTokenFromStorage();
+            removeRolFromStorage();
             return {
                 ...state,
                 token: '',
+                rol: '',
                 loading: false,
                 isAuthenticated: false,
             };
@@ -106,16 +136,19 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
         case 'VERIFY_TOKEN_SUCCESS':
             return {
                 ...state,
+                rol: action.payload?.rol || state.rol,
                 loading: false,
                 isAuthenticated: true,
             };
 
         case 'VERIFY_TOKEN_FAILURE':
-            // Eliminar token de localStorage si la verificación falla
+            // Eliminar token y rol de localStorage si la verificación falla
             removeTokenFromStorage();
+            removeRolFromStorage();
             return {
                 ...state,
                 token: '',
+                rol: '',
                 loading: false,
                 isAuthenticated: false,
             };
@@ -128,7 +161,7 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
 // Contexto
 interface AuthContextType {
     state: AuthState;
-    login: (tokenData: { token: string }) => void;
+    login: (tokenData: { token: string; rol: string }) => void;
     logout: () => void;
     verifyAuth: () => Promise<void>;
 }
@@ -159,14 +192,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }, []);
 
     // Función para iniciar sesión
-    const login = (tokenData: { token: string }) => {
+    const login = (tokenData: { token: string; rol: string }) => {
         try {
             dispatch({ type: 'LOGIN_START' });
 
-            // El token se guarda automáticamente en localStorage a través del reducer
+            // El token y rol se guardan automáticamente en localStorage a través del reducer
             dispatch({
                 type: 'LOGIN_SUCCESS',
-                payload: { token: tokenData.token }
+                payload: { token: tokenData.token, rol: tokenData.rol }
             });
 
             console.log('Login exitoso');
@@ -202,8 +235,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 return;
             }
 
-            // Obtener token desde localStorage
+            // Obtener token y rol desde localStorage
             const storedToken = getTokenFromStorage();
+            const storedRol = getRolFromStorage();
             const currentPath = window.location.pathname;
 
             console.log('Ruta actual:', currentPath);
@@ -229,14 +263,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             });
 
             if (response.ok) {
+                const data = await response.json();
+                
                 // Si el token es válido y no está en el estado, actualizarlo
                 if (!state.token) {
                     dispatch({
                         type: 'LOGIN_SUCCESS',
-                        payload: { token: storedToken }
+                        payload: { 
+                            token: storedToken, 
+                            rol: data.rol || storedRol || '' 
+                        }
                     });
                 } else {
-                    dispatch({ type: 'VERIFY_TOKEN_SUCCESS' });
+                    dispatch({ 
+                        type: 'VERIFY_TOKEN_SUCCESS',
+                        payload: { rol: data.rol || storedRol }
+                    });
                 }
             } else {
                 dispatch({ type: 'VERIFY_TOKEN_FAILURE' });
@@ -264,10 +306,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     useEffect(() => {
         if (isClient) {
             const storedToken = getTokenFromStorage();
+            const storedRol = getRolFromStorage();
             if (storedToken) {
                 dispatch({
                     type: 'LOGIN_SUCCESS',
-                    payload: { token: storedToken }
+                    payload: { token: storedToken, rol: storedRol }
                 });
             } else {
                 dispatch({ type: 'SET_LOADING', payload: false });
