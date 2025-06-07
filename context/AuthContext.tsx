@@ -1,3 +1,5 @@
+"use client"
+
 import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
@@ -51,7 +53,7 @@ const removeTokenFromStorage = (): void => {
 
 // Estado inicial - obtiene el token desde localStorage si está disponible
 const initialState: AuthState = {
-    token: getTokenFromStorage(),
+    token: '',
     loading: true,
     isAuthenticated: false,
 };
@@ -149,12 +151,12 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [state, dispatch] = useReducer(authReducer, initialState);
-    const router = useRouter();
-
-    // Función para verificar si estamos en una ruta específica
-    const isCurrentRoute = (path: string): boolean => {
-        return router.pathname === path;
-    };
+    const [isClient, setIsClient] = React.useState(false);
+    
+    // Asegurar que estamos en el cliente antes de usar useRouter
+    React.useEffect(() => {
+        setIsClient(true);
+    }, []);
 
     // Función para iniciar sesión
     const login = (tokenData: { token: string }) => {
@@ -169,8 +171,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
             console.log('Login exitoso');
 
-            // Navegar al dashboard después del login exitoso
-            router.push('/dashboard');
+            // Navegar al dashboard después del login exitoso solo si estamos en el cliente
+            if (isClient && typeof window !== 'undefined') {
+                window.location.href = '/dashboard';
+            }
 
         } catch (error) {
             console.error('Error en login:', error);
@@ -184,22 +188,28 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         dispatch({ type: 'LOGOUT' });
         console.log('Sesión cerrada');
 
-        // Navegar al inicio después de cerrar sesión
-        router.push('/');
+        // Navegar al inicio después de cerrar sesión solo si estamos en el cliente
+        if (isClient && typeof window !== 'undefined') {
+            window.location.href = '/';
+        }
     };
 
     // Función para verificar si el usuario está autenticado
     const verifyAuth = async () => {
         try {
-            // Obtener token desde localStorage (puede ser diferente del estado si se recargó la página)
+            // Solo ejecutar en el cliente
+            if (!isClient || typeof window === 'undefined') {
+                return;
+            }
+
+            // Obtener token desde localStorage
             const storedToken = getTokenFromStorage();
+            const currentPath = window.location.pathname;
 
-            console.log('Ruta actual:', router.pathname);
+            console.log('Ruta actual:', currentPath);
 
-            if (!storedToken && isCurrentRoute('/')) {
+            if (!storedToken && currentPath === '/') {
                 dispatch({ type: 'VERIFY_TOKEN_FAILURE' });
-                // Navegar al inicio si no hay token
-                router.push('/');
                 return;
             }
 
@@ -232,8 +242,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 dispatch({ type: 'VERIFY_TOKEN_FAILURE' });
 
                 // Navegar al inicio si el token no es válido y estamos en ruta protegida
-                if (!isCurrentRoute('/') && !isCurrentRoute('/login')) {
-                    router.push('/');
+                if (currentPath !== '/' && currentPath !== '/login') {
+                    window.location.href = '/';
                 }
             }
         } catch (error) {
@@ -241,19 +251,36 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             dispatch({ type: 'VERIFY_TOKEN_FAILURE' });
             
             // Navegar al inicio en caso de error y si estamos en ruta protegida
-            if (!isCurrentRoute('/') && !isCurrentRoute('/login')) {
-                router.push('/');
+            if (isClient && typeof window !== 'undefined') {
+                const currentPath = window.location.pathname;
+                if (currentPath !== '/' && currentPath !== '/login') {
+                    window.location.href = '/';
+                }
             }
         }
     };
 
-    // Verificar autenticación al cargar el componente
+    // Inicializar estado desde localStorage cuando el componente se monta en el cliente
     useEffect(() => {
-        // Solo ejecutar verifyAuth si estamos en el cliente
-        if (router.isReady) {
+        if (isClient) {
+            const storedToken = getTokenFromStorage();
+            if (storedToken) {
+                dispatch({
+                    type: 'LOGIN_SUCCESS',
+                    payload: { token: storedToken }
+                });
+            } else {
+                dispatch({ type: 'SET_LOADING', payload: false });
+            }
+        }
+    }, [isClient]);
+
+    // Verificar autenticación cuando el cliente esté listo
+    useEffect(() => {
+        if (isClient) {
             verifyAuth();
         }
-    }, [router.isReady]);
+    }, [isClient]);
 
     const value: AuthContextType = {
         state,
