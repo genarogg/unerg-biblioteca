@@ -25,44 +25,33 @@
     "baseUrl": "./",
     "paths": {
       "@components/*": [
-        "/components/*"
+        "./components/*"
       ],
       "@fn": [
-        "/functions/index.ts"
+        "./functions/index.ts"
       ],
       "@env": [
-        "/env.ts"
+        "./env.ts"
       ],
       "@public/*": [
-        "/public/*"
+        "./public/*"
       ],
       "@nano": [
-        "/components/nano/index.tsx"
+        "./components/nano/index.tsx"
       ],
       "@btn/*": [
-        "/components/btns/*"
+        "./components/btns/*"
       ],
-      "@slider/*": [
-        "/components/slider/*"
-      ],
+    
       "@hook/*": [
-        "/hook/*"
-      ],
-      "@tooltip": [
-        "/components/tooltip/index.tsx"
-      ],
-      "@sections/*": [
-        "/components/sections/*"
+        "./hook/*"
       ],
       "@ui": [
-        "/components/ui/index.tsx"
+        "./components/ui/index.tsx"
       ],
       "@context/*": [
-        "/context/*"
+        "./context/*"
       ],
-      "@/*": [
-        "/*"
-      ]
     },
   },
   "include": [

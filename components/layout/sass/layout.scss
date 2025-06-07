@@ -1,13 +1,11 @@
-// @use "/src/sass/global/variables" as var;
+// @use "sass/global/variables" as var;
 @use "./schema.scss" as var;
-
-
 
 
 .clean.containerAll {
     display: grid;
-    min-height: 130vh;
-    min-height: 130dvh;
+    min-height: 100vh;
+    min-height: 100dvh;
     grid-template-rows: auto 1fr auto;
 
 

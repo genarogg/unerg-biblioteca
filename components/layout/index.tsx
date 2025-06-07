@@ -3,6 +3,9 @@ import Header from "./header"
 import Footer from './Footer'
 import "./sass/layout.scss"
 
+import { ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
+
 import { Spinner } from '@ui';
 import { useAuth } from '@context/AuthContext';
 
@@ -35,6 +38,7 @@ const Layout: React.FC<LayoutProps> = ({
                         {children}
                     </main>
                     {footer ? footer : <Footer />}
+                    <ToastContainer />
                 </>
             )}
         </div>

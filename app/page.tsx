@@ -1,5 +1,6 @@
 'use client'
 import React from 'react'
+import Layout from '@components/layout'
 
 interface homeProps {
 
@@ -7,7 +8,9 @@ interface homeProps {
 
 const home: React.FC<homeProps> = () => {
     return (
-        <><p>hola</p></>
+        <Layout>
+            <p>hola</p>
+        </Layout>
     );
 }
 
