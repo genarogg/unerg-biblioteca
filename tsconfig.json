@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -18,10 +22,56 @@
         "name": "next"
       }
     ],
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@components/*": [
+        "/components/*"
+      ],
+      "@fn": [
+        "/functions/index.ts"
+      ],
+      "@env": [
+        "/env.ts"
+      ],
+      "@public/*": [
+        "/public/*"
+      ],
+      "@nano": [
+        "/components/nano/index.tsx"
+      ],
+      "@btn/*": [
+        "/components/btns/*"
+      ],
+      "@slider/*": [
+        "/components/slider/*"
+      ],
+      "@hook/*": [
+        "/hook/*"
+      ],
+      "@tooltip": [
+        "/components/tooltip/index.tsx"
+      ],
+      "@sections/*": [
+        "/components/sections/*"
+      ],
+      "@ui": [
+        "/components/ui/index.tsx"
+      ],
+      "@context/*": [
+        "/context/*"
+      ],
+      "@/*": [
+        "/*"
+      ]
+    },
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
