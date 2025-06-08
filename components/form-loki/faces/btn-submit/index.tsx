@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v4';
 import { print } from 'graphql';
 import { RECAPTCHA_KEY, URL_BACKEND } from "@env";
-import { notify } from "@nano"
+import { notify } from "@/components/nano"
 import { isStrongPassword, isValidEmail } from "@fn"
 import "./_btnSubmitBasic.scss"
 

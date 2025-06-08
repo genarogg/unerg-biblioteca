@@ -1,13 +1,14 @@
+"use client";
 import React from "react";
-import "./css/header.scss";
+import "../../sass/header.scss";
 
-import { BtnFreya } from "@ui";
+import { BtnFreya } from "@/components/ui";
 
 import Title from "./Title";
 import SideBar from "./sidebar";
 
-import Nav from "@components/layout/nav/Nav";
-import { useAuth } from "@context/AuthContext";
+import Nav from "@/components/layout/nav/Nav";
+
 
 interface HeaderProps {
     children?: React.ReactNode;
@@ -15,8 +16,6 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = () => {
-
-    const { state: { isAuthenticated } } = useAuth();
 
     const btnRemove = () => {
         console.log("btnRemove");
@@ -31,22 +30,9 @@ const Header: React.FC<HeaderProps> = () => {
 
     const menuItems = [
         { href: "/", label: "Inicio" },
+        { href: "/documentos", label: "Documentos" },
+        { href: "/login", label: "login" }
     ];
-
-    if (isAuthenticated) {
-        menuItems.push(
-            { href: "/dashboard", label: "Dashboard" },
-            { href: "/profile", label: "Perfil" },
-            { href: "/", label: "Salir" }
-        );
-    }
-    else{
-        menuItems.push(
-            { href: "/login", label: "login" }
-        );
-    }
-
-
 
     return (
         <header className="header-container">

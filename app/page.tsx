@@ -1,17 +1,19 @@
-'use client'
-import React from 'react'
-import Layout from '@components/layout'
+import { SimpleLayout } from '@/components/layout'
 
-interface homeProps {
+import { initializeSearchIndex } from "@/components/algolia/lib/data-service"
+import { InteractiveSearchDashboard } from "@/components/view/home/InteractiveSearchDashboard"
 
-}
+export default async function DashboardPage() {
+    
+    await initializeSearchIndex()
 
-const home: React.FC<homeProps> = () => {
     return (
-        <Layout>
-            <p>inicio</p>
-        </Layout>
+        <>
+            <SimpleLayout>
+                <InteractiveSearchDashboard />
+            </SimpleLayout>
+        </>
     );
 }
 
-export default home;
+export const dynamic = "force-dynamic"

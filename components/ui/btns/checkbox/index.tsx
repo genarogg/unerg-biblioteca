@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { FaCheck } from "react-icons/fa6";
-import { Icon } from "@ui"
+import { Icon } from "@/components/ui"
 import "./animated-checkbox.css"
 
 interface AnimatedCheckboxProps {

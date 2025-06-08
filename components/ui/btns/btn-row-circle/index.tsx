@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaArrowLeft } from 'react-icons/fa';
-import { Icon } from "@ui";
+import { Icon } from "@/components/ui";
 
 import "./_btnRowCircle.scss";
 

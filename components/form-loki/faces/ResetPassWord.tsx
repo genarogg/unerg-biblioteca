@@ -3,10 +3,10 @@ import { BsFillEnvelopeHeartFill } from 'react-icons/bs';
 import "./sass/_resetPassword.scss"
 
 import { $ } from "@fn";
-import { Input } from "@ui";
+import { Input } from "@/components/ui";
 
 import BtnSubmitBasic from './btn-submit';
-import { BtnRowCircle } from "@ui";
+import { BtnRowCircle } from "@/components/ui";
 
 
 interface ResetPassWordProps {

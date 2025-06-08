@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useRef, useEffect, forwardRef, useImperativeHandle } from 'react'
-import { Icon } from '@ui'
+import { Icon } from '@/components/ui'
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import './input.scss';
 

@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import Login from "@view/login";
+import Login from "@/components/view/login";
 
 interface loginProps {
 

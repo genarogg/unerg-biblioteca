@@ -1,7 +1,7 @@
 'use client';
 import React from 'react'
-import { A } from "@nano";
-import { Icon } from "@ui";
+import { A } from "@/components/nano";
+import { Icon } from "@/components/ui";
 
 interface NavProps {
   className?: string;

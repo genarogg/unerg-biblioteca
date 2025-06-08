@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { A } from '@nano'
+import { A } from '@/components/nano'
 
 interface TitleProps {
 

@@ -4,8 +4,8 @@ import React from 'react'
 import { BsTwitterX } from "react-icons/bs";
 import { FaGoogle, FaFacebookF, FaInstagram } from "react-icons/fa";
 
-import { A } from "@nano"
-import { Icon } from "@ui"
+import { A } from "@/components/nano"
+import { Icon } from "@/components/ui"
 import "./redesLogin.scss"
 
 interface RedesLoginProps {
