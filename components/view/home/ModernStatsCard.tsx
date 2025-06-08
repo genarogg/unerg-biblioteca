@@ -53,11 +53,9 @@ export function ModernStatsCard({ categoria, cantidad, porcentaje, color, isTota
 
   return (
     <motion.div
-      className={`modern-stats-card ${isTotal ? "total-card" : "category-card"}`}
+      className={`modern-stats-card category-card`}
       style={{
-        background: isTotal
-          ? `linear-gradient(135deg, ${color} 0%, ${color}CC 100%)`
-          : `linear-gradient(135deg, ${color}15 0%, ${color}08 100%)`,
+        background: `linear-gradient(135deg, ${color}15 0%, ${color}08 100%)`,
         borderColor: `${color}30`,
       }}
       variants={cardVariants}
@@ -82,7 +80,7 @@ export function ModernStatsCard({ categoria, cantidad, porcentaje, color, isTota
                 cx="60"
                 cy="60"
                 r="38"
-                fill={isTotal ? `${color}40` : `${color}25`}
+                fill={`${color}25`}
                 stroke={`${color}60`}
                 strokeWidth="2"
               />
@@ -189,7 +187,7 @@ export function ModernStatsCard({ categoria, cantidad, porcentaje, color, isTota
 
             {/* Number centered in circle */}
             <motion.div className="circle-number-container" variants={numberVariants}>
-              <span className="circle-number" style={{ color: isTotal ? "white" : color }}>
+              <span className="circle-number" style={{ color: color }}>
                 {cantidad}
               </span>
             </motion.div>
@@ -197,13 +195,13 @@ export function ModernStatsCard({ categoria, cantidad, porcentaje, color, isTota
         </motion.div>
 
         <div className="text-content">
-          <h3 className="category-title" style={{ color: isTotal ? "white" : "#1f2937" }}>
+          <h3 className="category-title" style={{ color: "#1f2937" }}>
             {categoria}
           </h3>
-          <p className="category-subtitle" style={{ color: isTotal ? "rgba(255,255,255,0.8)" : "#6b7280" }}>
-            {isTotal ? `Número: ${cantidad.toString().padStart(3, "0")}` : `${cantidad} elementos`}
+          <p className="category-subtitle" style={{ color: "#6b7280" }}>
+            {`${cantidad} elementos`}
           </p>
-          {!isTotal && (
+         
             <div className="percentage-bar">
               <motion.div
                 className="percentage-fill"
@@ -218,7 +216,7 @@ export function ModernStatsCard({ categoria, cantidad, porcentaje, color, isTota
                 {porcentaje}%
               </span>
             </div>
-          )}
+   
         </div>
       </div>
     </motion.div>

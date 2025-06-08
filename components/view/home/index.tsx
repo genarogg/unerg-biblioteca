@@ -18,7 +18,7 @@ interface DashboardStats {
   careerStats: CareerStat[]
 }
 
-export function InteractiveSearchDashboard() {
+const InteractiveSearchDashboard = () => {
   const [stats, setStats] = useState<DashboardStats | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -206,3 +206,5 @@ export function InteractiveSearchDashboard() {
     </motion.div>
   )
 }
+
+export default InteractiveSearchDashboard

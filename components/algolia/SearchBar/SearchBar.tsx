@@ -296,13 +296,13 @@ export function SearchBar({
         animate={
           shouldShowPanel
             ? {
-                boxShadow: "0 20px 60px rgba(124, 58, 237, 0.25), 0 8px 32px rgba(0, 0, 0, 0.15)",
+                boxShadow: "0 20px 60px rgba(61, 101, 253, 0.25), 0 8px 32px rgba(0, 0, 0, 0.15)",
                 y: -4,
                 scale: 1.02,
               }
             : isFocused
               ? {
-                  boxShadow: "0 12px 40px rgba(124, 58, 237, 0.15), 0 4px 16px rgba(0, 0, 0, 0.1)",
+                  boxShadow: "0 12px 40px rgba(61, 101, 253, 0.15), 0 4px 16px rgba(0, 0, 0, 0.1)",
                   y: -2,
                   scale: 1.01,
                 }
@@ -400,7 +400,7 @@ export function SearchBar({
                         onClick={() => handleSuggestionClick(suggestion)}
                         initial={{ opacity: 0, x: -20, scale: 0.95 }}
                         animate={{ opacity: 1, x: 0, scale: 1 }}
-                        whileHover={{ x: 4, backgroundColor: "rgba(124, 58, 237, 0.05)" }}
+                        whileHover={{ x: 4, backgroundColor: "rgba(61, 101, 253, 0.05)" }}
                         transition={{ duration: 0.3, delay: index * 0.05 }}
                       >
                         <motion.div className="suggestion-icon" whileHover={{ scale: 1.2, rotate: 5 }}>
@@ -458,8 +458,8 @@ export function SearchBar({
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             whileHover={{
                               y: -2,
-                              boxShadow: "0 8px 25px rgba(124, 58, 237, 0.15)",
-                              borderColor: "rgba(124, 58, 237, 0.3)",
+                              boxShadow: "0 8px 25px rgba(61, 101, 253, 0.15)",
+                              borderColor: "rgba(61, 101, 253, 0.3)",
                             }}
                             transition={{ duration: 0.3, delay: index * 0.08 }}
                           >
@@ -502,7 +502,7 @@ export function SearchBar({
       </motion.div>
 
       {/* Indicador de búsqueda mejorado */}
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {debouncedQuery !== query && query && (
           <motion.div
             className="searching-indicator"
@@ -536,7 +536,7 @@ export function SearchBar({
             <span> segundos...</span>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </div>
   )
 }
