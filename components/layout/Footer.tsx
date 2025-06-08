@@ -9,7 +9,7 @@ const Footer: React.FC<FooterProps> = () => {
     return (
         <footer className="footer-container">
             <div className="desktop-footer">
-                <p><strong>Genarogg | Desarrollado por Genarogg</strong></p>
+                <p><strong>Chende | Desarrollado por Chende</strong></p>
             </div>
         </footer>
     );

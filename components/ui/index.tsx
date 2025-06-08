@@ -15,6 +15,7 @@ import BtnRowCircle from "./btns/btn-row-circle";
 
 // Importing Loki buttons
 import BtnLoki from "./btns/btn-loki";
+import BtnFreya from "./btns/btn-freya";
 
 
 import Spinner from "./spinner/Spinner";
@@ -32,5 +33,6 @@ export {
     BtnLoki,
     BtnNormalBasic,
     BtnText,
-    BtnRowCircle
+    BtnRowCircle,
+    BtnFreya
 }

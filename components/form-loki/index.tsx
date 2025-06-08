@@ -19,7 +19,7 @@ interface LokiLoginProps {
 const LokiLogin: React.FC<LokiLoginProps> = ({
     register = true,
     reset = true,
-    social = true,
+    social = false,
 }) => {
     const [formState, setFormState] = useState("initial");
 
@@ -37,7 +37,7 @@ const LokiLogin: React.FC<LokiLoginProps> = ({
                     reset={reset}
                     social={social}
                 />
-                {register && <Register cardState={cardState} social={true} />}
+                {register && <Register cardState={cardState} social={social} />}
             </GoogleReCaptchaProvider>
         </div>
     );

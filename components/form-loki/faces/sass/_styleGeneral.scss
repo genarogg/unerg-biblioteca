@@ -11,7 +11,7 @@
 
 .container-form-loki {
     @include fn.center-x;
-    height: 630px;
+    height: 590px;
     position: relative;
     transform: rotateY(0deg);
     transform-style: preserve-3d;
@@ -33,7 +33,7 @@
         }
 
         .right {
-            @include fn.height(550px);
+            @include fn.height(580px);
             border: var.$border-color;
             transition: all ease 1.6s;
             z-index: 4;
@@ -114,7 +114,7 @@
     }
 
     .front {
-        @include fn.height(480px);
+        @include fn.height(420px);
         position: absolute;
         backface-visibility: hidden;
 

@@ -42,7 +42,6 @@
       "@btn/*": [
         "./components/btns/*"
       ],
-    
       "@hook/*": [
         "./hook/*"
       ],
@@ -51,6 +50,9 @@
       ],
       "@context/*": [
         "./context/*"
+      ],
+      "@view/*": [
+        "./components/view/*"
       ],
     },
   },

@@ -12,10 +12,10 @@ interface LoginProps {
     cardState: (css: string) => void;
     register: boolean;
     reset: boolean;
-    social?: boolean;
+    social: boolean;
 }
 
-const Login: React.FC<LoginProps> = ({ cardState, register, reset, social = false }) => {
+const Login: React.FC<LoginProps> = ({ cardState, register, reset, social }) => {
 
     const inputRef = useRef({
         email: "",
