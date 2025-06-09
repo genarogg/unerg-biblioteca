@@ -27,8 +27,6 @@
   font-family: inherit;
   outline: none;
 
-  color: #374151 !important; /* Asegura que el color del texto sea consistente */
-
   /* Hide browser's default search clear button */
   -webkit-appearance: none;
   -moz-appearance: none;

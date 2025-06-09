@@ -1,10 +1,8 @@
-import { createSearchIndex } from "@/components/algolia/lib/search-index"
-import type { SearchItem } from "@/components/algolia/lib/types"
+import { createSearchIndex } from "@/components/search/lib/search-index"
+import type { SearchItem } from "@/components/search/lib/types"
 
 // Create a singleton instance of the search index
 const searchIndex = createSearchIndex()
-
-// Define
 
 // Sample data for demonstration and fallback - Carreras Universitarias
 const sampleData: SearchItem[] = [
@@ -889,7 +887,6 @@ export async function getSearchData(): Promise<{
 // Initialize search index with data
 export async function initializeSearchIndex(): Promise<void> {
   const { data } = await getSearchData()
-
   searchIndex.clear()
   searchIndex.addItems(data)
   console.log(`🚀 Search index initialized with ${data.length} items`)
@@ -951,7 +948,6 @@ export function searchItems(query: string, options = {}) {
 }
 
 export function getSuggestions(query: string) {
-  console.log(searchIndex)
   return searchIndex.search(query, {
     limit: 5,
     fields: ["title", "carrera", "tipo"],
@@ -970,10 +966,10 @@ export function resetSearchIndex() {
 export function getCacheInfo() {
   return dataCache
     ? {
-      lastUpdated: dataCache.lastUpdated,
-      source: dataCache.source,
-      itemCount: dataCache.data.length,
-      shouldRefresh: shouldRefreshData(),
-    }
+        lastUpdated: dataCache.lastUpdated,
+        source: dataCache.source,
+        itemCount: dataCache.data.length,
+        shouldRefresh: shouldRefreshData(),
+      }
     : null
 }

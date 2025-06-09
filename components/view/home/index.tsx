@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { SearchBar } from "@/components/algolia/SearchBar/SearchBar"
+import { SearchBar } from "@/components/search/SearchBar/SearchBar"
 import { ModernStatsCard } from "./ModernStatsCard"
-import "./dashboard.css"
+import "./css/dashboard.css"
 
 interface CareerStat {
   categoria: string
@@ -29,9 +29,80 @@ const InteractiveSearchDashboard = () => {
   const fetchDashboardStats = async () => {
     try {
       setLoading(true)
-      const response = await fetch("/api/stats")
-      if (!response.ok) throw new Error("Error fetching stats")
-      const data = await response.json()
+
+      const data = {
+        totalItems: 68,
+        careerStats: [
+          {
+            categoria: 'Total Trabajos',
+            cantidad: 68,
+            porcentaje: 100,
+            color: '#7C3AED'
+          },
+          {
+            categoria: 'Ingeniería de Sistemas',
+            cantidad: 9,
+            porcentaje: 13,
+            color: '#8B5CF6'
+          },
+          {
+            categoria: 'Medicina',
+            cantidad: 9,
+            porcentaje: 13,
+            color: '#EC4899'
+          },
+          {
+            categoria: 'Derecho',
+            cantidad: 8,
+            porcentaje: 12,
+            color: '#06B6D4'
+          },
+          {
+            categoria: 'Psicología',
+            cantidad: 7,
+            porcentaje: 10,
+            color: '#10B981'
+          },
+          {
+            categoria: 'Administración de Empresas',
+            cantidad: 7,
+            porcentaje: 10,
+            color: '#F59E0B'
+          },
+          {
+            categoria: 'Arquitectura',
+            cantidad: 7,
+            porcentaje: 10,
+            color: '#EF4444'
+          },
+          {
+            categoria: 'Contaduría Pública',
+            cantidad: 6,
+            porcentaje: 9,
+            color: '#6366F1'
+          },
+          {
+            categoria: 'Enfermería',
+            cantidad: 6,
+            porcentaje: 9,
+            color: '#84CC16'
+          },
+          {
+            categoria: 'Ingeniería Civil',
+            cantidad: 5,
+            porcentaje: 7,
+            color: '#F97316'
+          },
+          {
+            categoria: 'Comunicación Social',
+            cantidad: 4,
+            porcentaje: 6,
+            color: '#8B5CF6'
+          }
+        ],
+        lastUpdated: '2025-06-08T20:55:10.517Z'
+      }
+
       setStats(data)
     } catch (error) {
       console.error("Error fetching dashboard stats:", error)
@@ -147,10 +218,8 @@ const InteractiveSearchDashboard = () => {
   return (
     <motion.div className="dashboard-container" variants={containerVariants} initial="hidden" animate="visible">
       <div className="dashboard-header">
-       
-
         <motion.div className="search-section" variants={searchVariants}>
-          <SearchBar placeholders={searchPlaceholders} typingSpeed={80} typingDelay={400} debounceTime={2000} />
+          <SearchBar placeholders={searchPlaceholders} typingSpeed={80} typingDelay={1500} debounceTime={2000} />
         </motion.div>
       </div>
 
@@ -207,4 +276,4 @@ const InteractiveSearchDashboard = () => {
   )
 }
 
-export default InteractiveSearchDashboard
+export default InteractiveSearchDashboard 

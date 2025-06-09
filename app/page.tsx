@@ -1,11 +1,9 @@
 import { SimpleLayout } from '@/components/layout'
 
-import { initializeSearchIndex } from "@/components/algolia/lib/data-service"
 import InteractiveSearchDashboard from "@/components/view/home"
 
-export default async function DashboardPage() {
+function DashboardPage() {
 
-    await initializeSearchIndex()
 
     return (
         <>
@@ -16,4 +14,5 @@ export default async function DashboardPage() {
     );
 }
 
-export const dynamic = "force-dynamic"
+export default DashboardPage;
+

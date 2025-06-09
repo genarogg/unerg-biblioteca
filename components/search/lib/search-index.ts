@@ -1,4 +1,4 @@
-import type { SearchItem, SearchIndex, SearchOptions } from "@/components/algolia/lib/types"
+import type { SearchItem, SearchIndex, SearchOptions } from "@/components/search/lib/types"
 
 export function createSearchIndex(): SearchIndex {
   const items: SearchItem[] = []

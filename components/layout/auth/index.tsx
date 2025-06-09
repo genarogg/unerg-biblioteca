@@ -25,7 +25,6 @@ const Layout: React.FC<LayoutProps> = ({
     footer
 }) => {
 
-
     const { state: { loading } } = useAuth();
 
     return (

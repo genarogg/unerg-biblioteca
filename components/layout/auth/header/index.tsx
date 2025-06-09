@@ -40,13 +40,12 @@ const Header: React.FC<HeaderProps> = () => {
             { href: "/", label: "Salir" }
         );
     }
-    else{
+    else {
         menuItems.push(
-            { href: "/login", label: "login" }
+            { href: "/documentos", label: "Documentos" },
+            { href: "/login", label: "login" },
         );
     }
-
-
 
     return (
         <header className="header-container">
