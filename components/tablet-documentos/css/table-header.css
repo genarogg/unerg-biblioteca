@@ -1,0 +1,192 @@
+.table-header-container {
+  margin-bottom: 32px;
+}
+
+.table-header-title-section {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.table-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #3b82f6;
+  margin: 0;
+  padding: 0;
+}
+
+.responsive-info {
+  display: flex;
+  align-items: center;
+}
+
+.responsive-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  background-color: #f0f9ff;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.table-header-divider {
+  height: 1px;
+  background-color: #e5e7eb;
+  margin-bottom: 20px;
+}
+
+.table-header-controls-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.table-search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 360px;
+  flex: 1;
+  min-width: 280px;
+}
+
+.table-search-icon {
+  position: absolute;
+  left: 12px;
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+.table-search-input {
+  width: 100%;
+  padding: 10px 12px 10px 40px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease;
+}
+
+.table-search-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.table-search-input::placeholder {
+  color: #9ca3af;
+}
+
+.table-modal-buttons-container {
+  display: flex;
+  gap: 20px;
+  justify-content: space-around;
+}
+
+.table-date-input {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease;
+  min-width: 150px;
+}
+
+.table-date-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.table-status-container {
+  display: flex;
+  align-items: center;
+}
+
+.table-view-toggle-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Responsive stacking for header controls */
+@media (max-width: 768px) {
+  .table-header-controls-section {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .table-search-container {
+    width: 100%;
+    max-width: none;
+    min-width: auto;
+  }
+
+  .table-modal-buttons-container {
+    width: 100%;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Make each button inside the container take full width */
+  .table-modal-buttons-container > * {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-header-controls-section {
+    gap: 20px;
+  }
+
+  .table-search-container {
+    margin-bottom: 4px;
+  }
+
+  .table-modal-buttons-container {
+    gap: 16px;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .table-title {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .table-header-title-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .responsive-info {
+    width: 100%;
+  }
+
+  .table-search-container {
+    min-width: auto;
+  }
+
+  .table-search-input {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .table-view-toggle-container {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .responsive-badge {
+    font-size: 11px;
+    padding: 3px 6px;
+  }
+}

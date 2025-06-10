@@ -2,7 +2,7 @@
 import React from 'react'
 // import { SimpleLayout } from '@/components/layout'
 import Layout from '@/components/layout/auth'
-import UserManagementTable from "@/components/tablet-usuarios";
+import UserManagementTable from "@/components/tablet-documentos";
 
 interface usuariosProps {
 
