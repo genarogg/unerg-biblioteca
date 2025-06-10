@@ -1,5 +1,5 @@
 import { $ } from "@fn";
-import { BtnText } from "@/components/ui";
+import { BtnText } from "@/components/ux";
 import "./headBtn.scss"
 
 interface HeadBtnProps {

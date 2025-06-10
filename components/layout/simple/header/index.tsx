@@ -2,7 +2,7 @@
 import React from "react";
 import "../../sass/header.scss";
 
-import { BtnFreya } from "@/components/ui";
+import { BtnFreya } from "@ux";
 
 import Title from "./Title";
 import SideBar from "./sidebar";

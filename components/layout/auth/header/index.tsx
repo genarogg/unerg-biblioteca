@@ -1,7 +1,7 @@
 import React from "react";
 import "../../sass/header.scss";
 
-import { BtnFreya } from "@/components/ui";
+import { BtnFreya } from "@ux";
 
 import Title from "./Title";
 import SideBar from "./sidebar";
@@ -43,6 +43,7 @@ const Header: React.FC<HeaderProps> = () => {
     else {
         menuItems.push(
             { href: "/documentos", label: "Documentos" },
+            { href: "/usuarios", label: "usuarios" },
             { href: "/login", label: "login" },
         );
     }

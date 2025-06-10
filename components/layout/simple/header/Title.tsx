@@ -16,7 +16,7 @@ const Title: React.FC<TitleProps> = () => {
             <A href="#" className="titulo-link">
                 <h1>
                     <strong>
-                        UNERG<Separador />BIBLIOTECA
+                        UNERG<Separador />POSGRADO
                     </strong>
                 </h1>
             </A>

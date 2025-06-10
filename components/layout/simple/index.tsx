@@ -27,7 +27,7 @@ const Layout: React.FC<LayoutProps> = ({
             <main>
                 {children}
             </main>
-            {footer ? footer : <Footer />}
+            {/* {footer ? footer : <Footer />} */}
             <ToastContainer />
         </div>
     );

@@ -28,7 +28,7 @@
         "./*"
       ],
       "@components/*": [
-        "components2/*"
+        "components/*"
       ],
       "@fn": [
         "./functions/index.ts"
@@ -40,22 +40,22 @@
         "./public/*"
       ],
       "@nano": [
-        "components2/nano/index.tsx"
+        "components/nano/index.tsx"
       ],
       "@btn/*": [
-        "components2/btns/*"
+        "components/btns/*"
       ],
       "@hook/*": [
         "./hook/*"
       ],
-      "@ui": [
-        "components2/ui/index.tsx"
+      "@ux": [
+        "components/ux/index.tsx"
       ],
       "@context/*": [
         "./context/*"
       ],
       "@view/*": [
-        "components2/view/*"
+        "components/view/*"
       ],
     },
   },
