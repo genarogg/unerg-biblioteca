@@ -4,6 +4,7 @@ import React from 'react'
 import Layout from '@/components/layout/auth'
 import UserManagementTable from "@/components/tablet-usuarios";
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface usuariosProps {
 
 }
