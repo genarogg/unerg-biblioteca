@@ -88,7 +88,7 @@ interface ExtendedFilterConfig {
   onGenericFilterChange: (filterType: string, value: string) => void
   clearAllFilters: () => void
   getFilterValue: (filterType: string) => string
-  setFilterValue: (filterType: string, value: string) => string
+  setFilterValue: (filterType: string, value: string) => void
 
   // Configuración de filtros disponibles
   availableFilters: {
@@ -237,9 +237,9 @@ export const TableProvider: React.FC<TableProviderProps> = ({ children }) => {
     [genericFilters],
   )
 
-  // Función para establecer valor de filtro
+  // Función para establecer valor de filtro - CORREGIDA
   const setFilterValue = useCallback(
-    (filterType: string, value: string) => {
+    (filterType: string, value: string): void => {
       handleGenericFilterChange(filterType, value)
     },
     [handleGenericFilterChange],

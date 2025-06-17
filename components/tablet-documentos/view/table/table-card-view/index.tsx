@@ -20,7 +20,7 @@ export default function TableCardView() {
   const { select } = config
 
   // Usar el hook de acciones - NO pasar onCustomView para que use el modal por defecto
-  const { handleDuplicate, handleView, handleDelete, handleEdit, viewModalOpen, selectedItemForView, closeViewModal } =
+  const { handleDuplicate, handleDelete, handleEdit, viewModalOpen, selectedItemForView, closeViewModal } =
     useTableRowActions({
       // NO pasar onCustomView para que use el modal interno
       onCustomDelete: (item) => {
@@ -57,7 +57,7 @@ export default function TableCardView() {
 
               {/* Indicador de estado */}
               <div className="card-actions">
-                <BadgeWrapper type="estado" value={item.estado} className="card-badge-header" />
+                <BadgeWrapper type="status" value={item.estado} className="card-badge-header" />
               </div>
             </div>
 
@@ -85,14 +85,14 @@ export default function TableCardView() {
 
               <div className="card-field">
                 <span className="field-label">Estado:</span>
-                <BadgeWrapper type="estado" value={item.estado} className="card-badge" />
+                <BadgeWrapper type="status" value={item.estado} className="card-badge" />
               </div>
 
               {/* Barra de acciones usando ActionsColumn */}
               <div className="card-table-actions">
                 <ActionsColumn
                   item={item}
-                  onViewReport={handleView}
+                  // onViewReport={handleView}
                   onEdit={handleEdit}
                   onUpdateItem={tableState.updateItem}
                   showEstadoSelect={true}
