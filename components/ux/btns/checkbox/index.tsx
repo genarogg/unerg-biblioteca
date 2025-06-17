@@ -1,8 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { FaCheck } from "react-icons/fa6";
-import { Icon } from "@/components/ux"
+import { Check } from "lucide-react"
 import "./animated-checkbox.css"
 
 interface AnimatedCheckboxProps {
@@ -53,7 +52,7 @@ export default function AnimatedCheckbox({ isChecked, onToggle, label, disabled 
                             delay: isChecked ? 0.1 : 0,
                         }}
                     >
-                        <Icon icon={<FaCheck />} />
+                        <Check size={14} strokeWidth={3} />
                     </motion.div>
                 </motion.div>
             </div>

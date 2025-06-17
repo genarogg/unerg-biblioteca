@@ -1,5 +1,5 @@
 import React from "react";
-import "./_btnExpancion.scss";
+import "./btnExpancion.css";
 
 interface BtnExpansionProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {

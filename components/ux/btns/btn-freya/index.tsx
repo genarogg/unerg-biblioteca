@@ -1,5 +1,5 @@
 import React from 'react'
-import "./_btnFreya.scss"
+import "./btnFreya.css"
 import { $ } from "@fn"
 
 interface BtnFreyaProps {

@@ -17,9 +17,15 @@
 .dashboard-title {
   font-size: 3rem;
   font-weight: 700;
-  color: #7c3aed;
+  color: #3d65fd;
   margin-bottom: 2rem;
   text-shadow: 0 2px 4px rgba(124, 58, 237, 0.1);
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  height: 50px; 
+  text-align: center;
+  font-size: 16px;
 }
 
 .search-section {

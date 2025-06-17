@@ -31,73 +31,116 @@ const InteractiveSearchDashboard = () => {
       setLoading(true)
 
       const data = {
-        totalItems: 68,
+        totalItems: 20,
         careerStats: [
+         
           {
-            categoria: 'Total Trabajos',
-            cantidad: 68,
-            porcentaje: 100,
-            color: '#7C3AED'
-          },
-          {
-            categoria: 'Ingeniería de Sistemas',
-            cantidad: 9,
-            porcentaje: 13,
+            categoria: 'Maestría en Ingeniería de Software',
+            cantidad: 1,
+            porcentaje: 5,
             color: '#8B5CF6'
           },
           {
-            categoria: 'Medicina',
-            cantidad: 9,
-            porcentaje: 13,
+            categoria: 'Maestría en Salud Pública',
+            cantidad: 1,
+            porcentaje: 5,
             color: '#EC4899'
           },
           {
-            categoria: 'Derecho',
-            cantidad: 8,
-            porcentaje: 12,
+            categoria: 'Maestría en Derecho Penal',
+            cantidad: 1,
+            porcentaje: 5,
             color: '#06B6D4'
           },
           {
-            categoria: 'Psicología',
-            cantidad: 7,
-            porcentaje: 10,
+            categoria: 'Maestría en Psicología Clínica',
+            cantidad: 1,
+            porcentaje: 5,
             color: '#10B981'
           },
           {
-            categoria: 'Administración de Empresas',
-            cantidad: 7,
-            porcentaje: 10,
+            categoria: 'Maestría en Administración ',
+            cantidad: 1,
+            porcentaje: 5,
             color: '#F59E0B'
           },
           {
-            categoria: 'Arquitectura',
-            cantidad: 7,
-            porcentaje: 10,
+            categoria: 'Maestría en Arquitectura Sustentable',
+            cantidad: 1,
+            porcentaje: 5,
             color: '#EF4444'
           },
           {
-            categoria: 'Contaduría Pública',
-            cantidad: 6,
-            porcentaje: 9,
+            categoria: 'Maestría en Auditoría',
+            cantidad: 1,
+            porcentaje: 5,
             color: '#6366F1'
           },
           {
-            categoria: 'Enfermería',
-            cantidad: 6,
-            porcentaje: 9,
+            categoria: 'Maestría en Enfermería Comunitaria',
+            cantidad: 1,
+            porcentaje: 5,
             color: '#84CC16'
           },
           {
-            categoria: 'Ingeniería Civil',
-            cantidad: 5,
-            porcentaje: 7,
+            categoria: 'Maestría en Ingeniería Estructural',
+            cantidad: 1,
+            porcentaje: 5,
             color: '#F97316'
           },
           {
-            categoria: 'Comunicación Social',
-            cantidad: 4,
-            porcentaje: 6,
+            categoria: 'Maestría en Comunicación Corporativa',
+            cantidad: 1,
+            porcentaje: 5,
             color: '#8B5CF6'
+          },
+          {
+            categoria: 'Especialización en Redes y Telecomunicaciones',
+            cantidad: 1,
+            porcentaje: 5,
+            color: '#6366F1'
+          },
+          {
+            categoria: 'Especialización en Ginecología y Obstetricia',
+            cantidad: 1,
+            porcentaje: 5,
+            color: '#EC4899'
+          },
+          {
+            categoria: 'Especialización en Derecho Laboral',
+            cantidad: 1,
+            porcentaje: 5,
+            color: '#06B6D4'
+          },
+          {
+            categoria: 'Especialización en Terapia Cognitivo Conductual',
+            cantidad: 1,
+            porcentaje: 5,
+            color: '#10B981'
+          },
+          {
+            categoria: 'Especialización en Gerencia de Proyectos',
+            cantidad: 1,
+            porcentaje: 5,
+            color: '#F59E0B'
+          },
+          {
+            categoria: 'Especialización en Diseño de Interiores',
+            cantidad: 1,
+            porcentaje: 5,
+            color: '#EF4444'
+          },
+          {
+            categoria: 'Especialización en Tributación',
+            cantidad: 1,
+            porcentaje: 5,
+            color: '#6366F1'
+          },
+          {
+            categoria: 'Especialización en Enfermería Oncológica',
+            cantidad: 1,
+            porcentaje: 5,
+            color: '#84CC16'
           }
         ],
         lastUpdated: '2025-06-08T20:55:10.517Z'
@@ -112,12 +155,12 @@ const InteractiveSearchDashboard = () => {
   }
 
   const searchPlaceholders = [
-    "Buscar tesis de medicina...",
-    "Proyectos de ingeniería...",
-    "Investigaciones de psicología...",
-    "Trabajos de derecho...",
-    "Monografías de arquitectura...",
-    "Estudios de administración...",
+    "Buscar postgrados en salud...",
+    "Especializaciones en derecho...",
+    "Maestrías en ingeniería...",
+    "Estudios avanzados en psicología...",
+    "Postgrados en administración...",
+    "Programas de comunicación..."
   ]
 
   // Animation variants
@@ -128,25 +171,6 @@ const InteractiveSearchDashboard = () => {
       transition: {
         duration: 0.6,
         staggerChildren: 0.2,
-      },
-    },
-  }
-
-  const titleVariants = {
-    hidden: {
-      opacity: 0,
-      y: -50,
-      scale: 0.9,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 15,
-        duration: 0.8,
       },
     },
   }
@@ -217,6 +241,13 @@ const InteractiveSearchDashboard = () => {
 
   return (
     <motion.div className="dashboard-container" variants={containerVariants} initial="hidden" animate="visible">
+
+      <motion.div className="dashboard-title" variants={containerVariants}>
+        <h1>
+          Repositorio Academico
+        </h1>
+      </motion.div>
+
       <div className="dashboard-header">
         <motion.div className="search-section" variants={searchVariants}>
           <SearchBar placeholders={searchPlaceholders} typingSpeed={80} typingDelay={1500} debounceTime={2000} />
@@ -243,7 +274,7 @@ const InteractiveSearchDashboard = () => {
               }}
             />
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
-              Cargando estadísticas...
+              Cargando postgrados...
             </motion.p>
           </motion.div>
         ) : (
@@ -263,7 +294,7 @@ const InteractiveSearchDashboard = () => {
                       cantidad={careerStat.cantidad}
                       porcentaje={careerStat.porcentaje}
                       color={careerStat.color}
-                      isTotal={index === 0}
+                      // isTotal={index === 0}
                     />
                   </motion.div>
                 ))}
@@ -276,4 +307,4 @@ const InteractiveSearchDashboard = () => {
   )
 }
 
-export default InteractiveSearchDashboard 
+export default InteractiveSearchDashboard

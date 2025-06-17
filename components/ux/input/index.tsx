@@ -1,8 +1,8 @@
 "use client"
 import React, { useState, useRef, useEffect, forwardRef, useImperativeHandle } from 'react'
-import { Icon } from '@/components/ux'
+import Icon from '../icon'
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
-import './input.scss';
+import './input.css';
 
 interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'type'> {
     className?: string;

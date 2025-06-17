@@ -1,0 +1,287 @@
+.table-config-btn {
+  background-color: #6b7280 !important;
+  color: white !important;
+  border: 1px solid #6b7280 !important;
+}
+
+.table-config-btn:hover {
+  background-color: #4b5563 !important;
+  border-color: #4b5563 !important;
+}
+
+.table-config-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.config-section {
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 20px;
+}
+
+.config-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.config-section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 16px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #f3f4f6;
+}
+
+.config-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.config-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.config-checkbox-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.config-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #374151;
+}
+
+.config-checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d1d5db;
+  border-radius: 4px;
+  cursor: pointer;
+  accent-color: #3b82f6;
+}
+
+.checkbox-text {
+  font-weight: 500;
+}
+
+.config-help-text {
+  font-size: 12px;
+  color: #6b7280;
+  font-style: italic;
+  margin-left: 30px;
+}
+
+.config-info {
+  background-color: #f8fafc;
+  padding: 12px;
+  border-radius: 6px;
+  border-left: 4px solid #3b82f6;
+}
+
+.info-text {
+  font-size: 13px;
+  color: #475569;
+  font-weight: 500;
+}
+
+.columns-config {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.column-toggle {
+  display: flex;
+}
+
+.column-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  font-size: 13px;
+}
+
+.column-toggle-btn.visible {
+  background-color: #f0f9ff;
+  border-color: #3b82f6;
+  color: #1e40af;
+}
+
+.column-toggle-btn.hidden {
+  background-color: #f9fafb;
+  border-color: #d1d5db;
+  color: #6b7280;
+}
+
+.column-toggle-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.column-name {
+  font-weight: 500;
+}
+
+.reset-config-btn {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.reset-config-btn:hover {
+  background-color: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.config-info-section {
+  background-color: #f8fafc;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.info-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 12px 0;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  border: 1px solid #e5e7eb;
+}
+
+.info-label {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.info-value {
+  font-size: 12px;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .table-config-content {
+    gap: 20px;
+  }
+
+  .columns-config {
+    grid-template-columns: 1fr;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .config-section-title {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-config-content {
+    gap: 16px;
+  }
+
+  .config-section {
+    padding-bottom: 16px;
+  }
+
+  .column-toggle-btn {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+}
+
+Estilos para el botón de agregar usuario
+.add-user-btn {
+  background-color: #020817 !important;
+  color: white !important;
+  border: 1px solid #020817 !important;
+}
+
+
+
+.add-user-btn:focus {
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1) !important;
+}
+
+/* Estilos para el formulario de agregar usuario */
+.add-user-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-info {
+  background-color: #f0f9ff;
+  padding: 12px;
+  border-radius: 6px;
+  border-left: 4px solid #3b82f6;
+  margin-top: 8px;
+}
+
+.form-info p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Responsive para el formulario */
+@media (max-width: 768px) {
+  .add-user-form {
+    gap: 12px;
+  }
+
+  .form-info {
+    padding: 10px;
+  }
+
+  .form-info p {
+    font-size: 13px !important;
+  }
+}

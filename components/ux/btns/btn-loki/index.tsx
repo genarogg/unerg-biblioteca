@@ -1,6 +1,6 @@
 import React from 'react';
 import { $ } from "@fn";
-import "./_btnLoki.scss";
+import "./btnLoki.css";
 
 interface BtnLokiProps {
   onClick?: () => void;

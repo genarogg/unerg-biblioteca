@@ -2,10 +2,10 @@
 
 import type React from "react"
 import { useState, useEffect, useRef } from "react"
-import "./modal.scss"
+import "./modal.css"
 
 interface ModalProps {
-  title: string
+  title?: string // Ahora es opcional
   icon?: React.ReactNode
   children: React.ReactNode
   buttonClassName?: string
@@ -13,7 +13,14 @@ interface ModalProps {
   onclick?: () => void
 }
 
-export default function Modal({ title, icon, children, buttonClassName, buttonText = "Guardar", onclick }: ModalProps) {
+export default function Modal({ 
+  title, 
+  icon, 
+  children, 
+  buttonClassName, 
+  buttonText = "Guardar", 
+  onclick
+}: ModalProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [isClosing, setIsClosing] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
@@ -84,20 +91,43 @@ export default function Modal({ title, icon, children, buttonClassName, buttonTe
     }
   }
 
-  if (!isOpen) {
+  // Determinar si es solo icono basado en la presencia del título
+  const isIconOnly = !title && icon
+
+  // Renderizar el contenido del botón basado en isIconOnly
+  const renderButtonContent = () => {
+    if (isIconOnly) {
+      return <span className="modal-trigger-icon">{icon}</span>
+    }
+    
     return (
-      <button className={`modal-trigger ${buttonClassName || ""}`} onClick={openModal}>
+      <>
         {icon && <span className="modal-trigger-icon">{icon}</span>}
         <span>{title}</span>
+      </>
+    )
+  }
+
+  if (!isOpen) {
+    return (
+      <button 
+        className={`modal-trigger ${isIconOnly ? 'modal-trigger-icon-only' : ''} ${buttonClassName || ""}`} 
+        onClick={openModal}
+        title={isIconOnly ? "Abrir modal" : undefined} // Tooltip genérico para solo icono
+      >
+        {renderButtonContent()}
       </button>
     )
   }
 
   return (
     <>
-      <button className={`modal-trigger ${buttonClassName || ""}`} onClick={openModal}>
-        {icon && <span className="modal-trigger-icon">{icon}</span>}
-        <span>{title}</span>
+      <button 
+        className={`modal-trigger ${isIconOnly ? 'modal-trigger-icon-only' : ''} ${buttonClassName || ""}`} 
+        onClick={openModal}
+        title={isIconOnly ? "Abrir modal" : undefined}
+      >
+        {renderButtonContent()}
       </button>
 
       <div className={`modal-overlay ${isClosing ? "modal-overlay-closing" : ""}`} onClick={handleOverlayClick}>
@@ -105,7 +135,7 @@ export default function Modal({ title, icon, children, buttonClassName, buttonTe
           <div className="modal-header">
             <h2 className="modal-title">
               {icon && <span className="modal-title-icon">{icon}</span>}
-              {title}
+              {title || "Modal"} {/* Fallback si no hay título */}
             </h2>
             <button className="modal-close" onClick={closeModal}>
               ×

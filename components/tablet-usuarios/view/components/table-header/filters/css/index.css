@@ -1,0 +1,296 @@
+/* Contenedor principal del toggle */
+.filter-toggle-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  width: 100%;
+}
+
+/* Área de contenido de filtros - se expande/contrae */
+.filter-content-area {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: flex-end;
+  /* overflow: hidden; */
+  align-items: center;
+  /* gap: 8px; */
+  flex-wrap: wrap;
+  min-height: 40px; /* Asegurar altura mínima consistente */
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+/* Placeholder para mantener el espacio cuando está cargando */
+.filter-content-placeholder {
+  flex: 1;
+  min-height: 40px;
+}
+
+/* Botón Toggle - Posición fija */
+.filter-toggle-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  background-color: #020817;
+  border: 1px solid #020817;
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  transition: all 0.2s ease;
+  color: white;
+  flex-shrink: 0;
+  margin-left: auto; /* Empuja el botón hacia la derecha */
+}
+
+.filter-toggle-icon-btn:hover {
+  background-color: #020817;
+  border-color: #020817;
+  /* transform: translateY(-1px); */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.filter-toggle-icon-btn:focus {
+  outline-offset: 2px;
+  outline: 2px solid #020817;
+}
+
+.filter-toggle-icon-btn:active {
+  transform: translateY(0);
+}
+
+/* Estados del botón */
+.filter-toggle-icon-btn.active {
+  background-color: #020817;
+  border-color: #020817;
+  color: white;
+  /* box-shadow: 0 2px 8px #020817; */
+}
+
+.filter-toggle-icon-btn.active:hover {
+  background-color: #020817;
+  border-color: #020817;
+}
+
+.filter-toggle-icon-btn.inactive {
+  background-color: #020817;
+  border-color: #020817;
+  color: white;
+}
+
+.filter-toggle-icon-btn.inactive:hover {
+  background-color: #020817;
+  border-color: #020817;
+}
+
+/* Estado de carga */
+.filter-toggle-icon-btn.loading {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.filter-toggle-icon-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Indicador de estado - punto pequeño */
+.filter-status-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.filter-status-dot.visible {
+  background: #29fc7a;
+  /* box-shadow: 0 0 4px #29fc7a; */
+  /* animation: pulse-green 2s infinite; */
+}
+
+.filter-status-dot.hidden {
+  background: #ef4444;
+  box-shadow: 0 0 4px rgba(239, 68, 68, 0.6);
+}
+
+/* Contenido de filtros inline */
+.filter-content-inline {
+  display: flex;
+  align-items: center;
+  /* overflow: hidden; */
+  margin-right: 12px; /* Espacio entre filtros y botón */
+}
+
+.filter-content-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+}
+
+/* Estilos para componentes siempre activos */
+.always-active-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.always-active-filter {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Modificación para filtros antes de los colapsables */
+.filter-content-area .always-active-filters:first-child {
+  margin-right: 8px;
+}
+
+/* Modificación para filtros después de los colapsables */
+.filter-content-area .always-active-filters:last-child {
+  margin-left: 8px;
+}
+
+/* Estilos para cuando no hay filtros colapsables visibles */
+.filter-content-area:has(.always-active-filters) {
+  justify-content: flex-start;
+}
+
+/* Indicador visual para filtros siempre activos */
+.always-active-filter::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  /* border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 6px; */
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.always-active-filter:hover::before {
+  opacity: 1;
+}
+
+/* Opcional: Badge para indicar que es un filtro permanente */
+.always-active-filter[data-show-badge="true"]::after {
+  content: "●";
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 8px;
+  height: 8px;
+  background: #10b981;
+  border-radius: 50%;
+  font-size: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+/* Animaciones */
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .filter-toggle-container {
+    /* flex-direction: column;
+    align-items: flex-end; */
+    /* gap: 8px; */
+  }
+
+  .filter-content-area {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .filter-toggle-icon-btn {
+    margin-left: 0;
+    align-self: flex-end;
+  }
+
+  .filter-content-inline {
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .always-active-filters {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .filter-toggle-icon-btn {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+  }
+
+  .filter-status-dot {
+    width: 5px;
+    height: 5px;
+    top: 1px;
+    right: 1px;
+  }
+
+  .filter-content-wrapper {
+    gap: 8px;
+  }
+
+  .always-active-filters {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-toggle-icon-btn {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+  }
+
+  .filter-content-wrapper {
+    gap: 6px;
+  }
+
+  .always-active-filters {
+    gap: 6px;
+  }
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .filter-toggle-icon-btn,
+  .filter-content-inline,
+  .filter-status-dot,
+  .always-active-filter::before {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Focus visible para mejor accesibilidad */
+.filter-toggle-icon-btn:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
