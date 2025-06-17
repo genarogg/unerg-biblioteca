@@ -88,7 +88,7 @@ interface ExtendedFilterConfig {
   onGenericFilterChange: (filterType: string, value: string) => void
   clearAllFilters: () => void
   getFilterValue: (filterType: string) => string
-  setFilterValue: (filterType: string, value: string) => void
+  setFilterValue: (filterType: string, value: string) => string
 
   // Configuración de filtros disponibles
   availableFilters: {
@@ -130,32 +130,27 @@ interface TableProviderProps {
   children: ReactNode
 }
 
-// Configuración de filtros disponibles - Mover fuera del componente para evitar recreación
+// Configuración de filtros disponibles - CORREGIDA
 const AVAILABLE_FILTERS = {
-  role: {
+  lineaInvestigacion: {
     defaultValue: "todos",
     resetPage: true,
-    accessor: "rol",
+    accessor: "lineaInvestigacion",
+  },
+  estado: {
+    defaultValue: "todos",
+    resetPage: true,
+    accessor: "estado",
+  },
+  autor: {
+    defaultValue: "todos",
+    resetPage: true,
+    accessor: "autor",
   },
   status: {
     defaultValue: "todos",
     resetPage: true,
     accessor: "status",
-  },
-  department: {
-    defaultValue: "todos",
-    resetPage: true,
-    accessor: "departamento",
-  },
-  priority: {
-    defaultValue: "todos",
-    resetPage: true,
-    accessor: "prioridad",
-  },
-  category: {
-    defaultValue: "todos",
-    resetPage: true,
-    accessor: "categoria",
   },
 } as const
 
@@ -164,13 +159,13 @@ export const TableProvider: React.FC<TableProviderProps> = ({ children }) => {
   // Configuración por defecto
   const defaultConfig: TableConfig = {
     select: false,
-    cuadricula: false,
+    cuadricula: true,
     columns: [
-      { id: "id", header: "Id", accessor: "id", sortable: true },
-      { id: "nombre", header: "Nombre", accessor: "nombre", sortable: true },
-      { id: "correo", header: "Correo", accessor: "correo", sortable: true },
-      { id: "cedula", header: "Cédula", accessor: "cedula", sortable: true },
-      { id: "status", header: "Estatus", accessor: "status", sortable: true },
+      { id: "id", header: "ID", accessor: "id", sortable: true },
+      { id: "titulo", header: "Título", accessor: "titulo", sortable: true },
+      { id: "lineaInvestigacion", header: "Línea de Investigación", accessor: "lineaInvestigacion", sortable: true },
+      { id: "autor", header: "Autor", accessor: "autor", sortable: true },
+      { id: "estado", header: "Estado", accessor: "estado", sortable: true },
       { id: "acciones", header: "Acciones", accessor: "", sortable: false },
     ],
   }
@@ -202,35 +197,42 @@ export const TableProvider: React.FC<TableProviderProps> = ({ children }) => {
   const [dateFrom, setDateFrom] = useState("")
   const [dateTo, setDateTo] = useState("")
 
-  // Estado para filtros genéricos
+  // Estado para filtros genéricos - INICIALIZACIÓN CORREGIDA
   const [genericFilters, setGenericFilters] = useState<GenericFilter>({
-    role: "todos",
+    lineaInvestigacion: "todos",
+    estado: "todos",
+    autor: "todos",
     status: "todos",
   })
 
   // Función genérica para cambiar filtros
   const handleGenericFilterChange = useCallback((filterType: string, value: string) => {
-    setGenericFilters((prev) => ({
-      ...prev,
-      [filterType]: value,
-    }))
+    console.log(`🔍 Cambiando filtro ${filterType} a:`, value)
+
+    setGenericFilters((prev) => {
+      const newFilters = {
+        ...prev,
+        [filterType]: value,
+      }
+      console.log("🔍 Nuevos filtros:", newFilters)
+      return newFilters
+    })
 
     // Resetear página si está configurado
     if (AVAILABLE_FILTERS[filterType as keyof typeof AVAILABLE_FILTERS]?.resetPage) {
       setCurrentPage(1)
     }
-
-    console.log(`Filtro genérico ${filterType} cambiado a:`, value)
   }, [])
 
   // Función para obtener valor de filtro
   const getFilterValue = useCallback(
     (filterType: string): string => {
-      return (
+      const value =
         genericFilters[filterType] ||
         AVAILABLE_FILTERS[filterType as keyof typeof AVAILABLE_FILTERS]?.defaultValue ||
         "todos"
-      )
+      console.log(`🔍 Obteniendo valor de filtro ${filterType}:`, value)
+      return value
     },
     [genericFilters],
   )
@@ -298,19 +300,28 @@ export const TableProvider: React.FC<TableProviderProps> = ({ children }) => {
     loadConfigFromStorage()
   }, [loadConfigFromStorage])
 
-  // Elementos filtrados con sistema genérico
+  // Elementos filtrados con sistema genérico - LÓGICA CORREGIDA
   const filteredItems = useMemo(() => {
-    return items.filter((item) => {
+    console.log("🔍 Aplicando filtros...")
+    console.log("🔍 Items originales:", items.length)
+    console.log("🔍 Filtros actuales:", genericFilters)
+    console.log("🔍 Término de búsqueda:", searchTerm)
+
+    const filtered = items.filter((item) => {
       // Filtro de búsqueda
       const matchesSearch =
-        item.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.correo.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.rol.toLowerCase().includes(searchTerm.toLowerCase())
+        !searchTerm ||
+        item.titulo.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.lineaInvestigacion.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.autor.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.estado.toLowerCase().includes(searchTerm.toLowerCase())
 
       // Filtros genéricos
       const matchesGenericFilters = Object.keys(genericFilters).every((filterType) => {
         const filterValue = genericFilters[filterType]
-        if (filterValue === "todos") return true
+
+        // Si el filtro es "todos", no filtrar
+        if (!filterValue || filterValue === "todos") return true
 
         // Obtener el accessor del filtro
         const accessor = AVAILABLE_FILTERS[filterType as keyof typeof AVAILABLE_FILTERS]?.accessor
@@ -318,7 +329,13 @@ export const TableProvider: React.FC<TableProviderProps> = ({ children }) => {
 
         // Comparar el valor del item con el filtro
         const itemValue = (item as any)[accessor]
-        return itemValue === filterValue
+        const matches = itemValue === filterValue
+
+        if (filterType === "lineaInvestigacion") {
+          console.log(`🔍 Filtro ${filterType}: item.${accessor}="${itemValue}" === "${filterValue}" = ${matches}`)
+        }
+
+        return matches
       })
 
       // Filtros de fecha (si existen campos de fecha)
@@ -332,8 +349,12 @@ export const TableProvider: React.FC<TableProviderProps> = ({ children }) => {
         }
       }
 
-      return matchesSearch && matchesGenericFilters && matchesDateRange
+      const finalMatch = matchesSearch && matchesGenericFilters && matchesDateRange
+      return finalMatch
     })
+
+    console.log("🔍 Items filtrados:", filtered.length)
+    return filtered
   }, [items, searchTerm, genericFilters, dateFrom, dateTo])
 
   // Calcular páginas
@@ -439,7 +460,7 @@ export const TableProvider: React.FC<TableProviderProps> = ({ children }) => {
 
   // Funciones de datos
   const addItem = (newItem: DataTable) => {
-    setItems((prev) => [...prev, newItem].reverse())
+    setItems((prev) => [...prev, newItem])
   }
 
   const updateItem = (itemId: number, updatedItem: Partial<DataTable>) => {
@@ -527,7 +548,8 @@ export const TableProvider: React.FC<TableProviderProps> = ({ children }) => {
 
   const handleStatusChange = useCallback(
     (status: string) => {
-      handleGenericFilterChange("status", status)
+      console.log("🔍 handleStatusChange llamado con:", status)
+      handleGenericFilterChange("estado", status)
     },
     [handleGenericFilterChange],
   )
@@ -613,11 +635,10 @@ export const TableProvider: React.FC<TableProviderProps> = ({ children }) => {
     showStatusFilter: true,
     statusOptions: [
       { value: "todos", label: "Todos" },
-      { value: "ACTIVO", label: "Activo" },
-      { value: "INACTIVO", label: "Inactivo" },
       { value: "PENDIENTE", label: "Pendiente" },
+      { value: "VALIDADO", label: "Validado" },
     ],
-    selectedStatus: getFilterValue("status"),
+    selectedStatus: getFilterValue("estado"),
     onStatusChange: handleStatusChange,
     selectedRole: getFilterValue("role"),
     onRoleChange: handleRoleChange,
@@ -630,19 +651,6 @@ export const TableProvider: React.FC<TableProviderProps> = ({ children }) => {
     setFilterValue,
     availableFilters: AVAILABLE_FILTERS,
   }
-
-  const STATUS_CONFIG = {
-    activo: {
-      variant: "success" as const,
-      label: "Activo",
-      color: "#22c55e",
-    },
-    inactivo: {
-      variant: "error" as const,
-      label: "Inactivo",
-      color: "#ef4444",
-    },
-  } as const
 
   // Valor del contexto
   const contextValue: TableContextType = {

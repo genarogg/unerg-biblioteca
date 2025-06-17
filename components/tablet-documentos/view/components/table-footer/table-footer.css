@@ -1,0 +1,327 @@
+/* Barra de acciones masivas con posicionamiento dinámico */
+.bulk-actions-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: rgba(240, 249, 255, 0.98);
+  border: 1px solid rgba(186, 230, 253, 0.8);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 12px 12px 0 0;
+  z-index: 100;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Posicionamiento fijo (cuando hay espacio en la pantalla) */
+.bulk-actions-bar.fixed {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  max-width: 90vw;
+  min-width: 600px;
+  width: auto;
+  border-radius: 12px;
+}
+
+.bulk-actions-bar.fixed.visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Posicionamiento sticky (cuando el contenedor es visible) */
+.bulk-actions-bar.sticky {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(100%);
+  border-radius: 0;
+  max-width: none;
+  min-width: auto;
+}
+
+.bulk-actions-bar.sticky.visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Contenedor principal de la tabla */
+.table-management-container {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: visible;
+  min-height: 500px;
+  /* Espacio para la barra cuando esté en modo sticky */
+  padding-bottom: 100px;
+}
+
+.bulk-actions-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #0369a1;
+}
+
+.bulk-count {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.bulk-actions-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.bulk-role-change {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bulk-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.bulk-role-change .select-root {
+  min-width: 160px;
+}
+
+.bulk-role-change .select-trigger {
+  height: 36px;
+  font-size: 13px;
+  border: 1px solid #3b82f6;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #1e40af;
+  backdrop-filter: blur(8px);
+}
+
+.bulk-role-change .select-trigger:hover {
+  border-color: #2563eb;
+  background-color: rgba(248, 250, 252, 0.95);
+}
+
+.bulk-role-change .select-trigger:focus {
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.bulk-clear-btn {
+  padding: 8px 16px;
+  background-color: rgba(243, 244, 246, 0.9);
+  color: #6b7280;
+  border: 1px solid rgba(209, 213, 219, 0.8);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+}
+
+.bulk-clear-btn:hover {
+  background-color: rgba(229, 231, 235, 0.95);
+  color: #374151;
+  border-color: rgba(156, 163, 175, 0.9);
+  transform: translateY(-1px);
+}
+
+/* Contenedor para los botones de acción masiva */
+.bulk-action-buttons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Estilos base para botones de acción masiva */
+.bulk-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  min-height: 36px;
+  backdrop-filter: blur(8px);
+}
+
+/* Botón de duplicar */
+.bulk-action-btn.duplicate-btn {
+  background-color: rgba(240, 249, 255, 0.9);
+  color: #0369a1;
+  border: 1px solid rgba(186, 230, 253, 0.8);
+}
+
+.bulk-action-btn.duplicate-btn:hover {
+  background-color: rgba(224, 242, 254, 0.95);
+  border-color: rgba(125, 211, 252, 0.9);
+  color: #0c4a6e;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(3, 105, 161, 0.15);
+}
+
+/* Botón de eliminar */
+.bulk-action-btn.delete-btn {
+  background-color: rgba(254, 242, 242, 0.9);
+  color: #dc2626;
+  border: 1px solid rgba(254, 202, 202, 0.8);
+}
+
+.bulk-action-btn.delete-btn:hover {
+  background-color: rgba(254, 226, 226, 0.95);
+  border-color: rgba(252, 165, 165, 0.9);
+  color: #b91c1c;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.15);
+}
+
+/* Efectos de hover para todos los botones de acción */
+.bulk-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Notificación de acción masiva */
+.bulk-action-notification {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  z-index: 1001;
+  padding: 12px 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideInRight 0.3s ease-out;
+  backdrop-filter: blur(8px);
+}
+
+.bulk-action-notification.success {
+  background-color: rgba(220, 252, 231, 0.95);
+  border: 1px solid #16a34a;
+  color: #166534;
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive para ambos modos */
+@media (max-width: 768px) {
+  .bulk-actions-bar {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+    padding: 16px;
+  }
+
+  .bulk-actions-bar.fixed {
+    min-width: 90vw;
+    max-width: 95vw;
+  }
+
+  .bulk-actions-controls {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .bulk-role-change {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .bulk-role-change .select-root {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .bulk-action-buttons {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .bulk-action-btn {
+    flex: 1;
+    justify-content: center;
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+
+  .table-management-container {
+    padding-bottom: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bulk-actions-bar {
+    padding: 12px;
+  }
+
+  .bulk-actions-bar.fixed {
+    min-width: 95vw;
+  }
+
+  .bulk-action-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .bulk-action-btn {
+    width: 100%;
+    font-size: 11px;
+    padding: 10px 12px;
+  }
+
+  .bulk-count {
+    font-size: 13px;
+  }
+
+  .bulk-label {
+    font-size: 13px;
+  }
+
+  .table-management-container {
+    padding-bottom: 100px;
+  }
+}

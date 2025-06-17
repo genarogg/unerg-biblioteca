@@ -1,0 +1,40 @@
+/* Estilos para el botón de agregar usuario */
+.add-user-btn {
+  background-color: #020817 !important;
+  color: white !important;
+  border: 1px solid #020817 !important;
+}
+
+
+
+.add-user-btn:focus {
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1) !important;
+}
+
+/* Estilos para el formulario de agregar usuario */
+.add-user-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 24px;
+}
+
+.form-info {
+  margin-top: 8px;
+}
+
+.form-info p {
+  line-height: 1.4;
+}
+
+/* Responsive para el formulario */
+@media (max-width: 768px) {
+  .add-user-form {
+    gap: 24px;
+  }
+
+  .form-info p {
+    font-size: 13px !important;
+    padding: 10px !important;
+  }
+}

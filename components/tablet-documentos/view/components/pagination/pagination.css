@@ -1,0 +1,191 @@
+.table-pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  padding: 0 8px;
+  min-height: 36px;
+  flex-wrap: nowrap;
+  gap: 12px;
+}
+
+.table-pagination-info {
+  font-size: 14px;
+  color: #6b7280;
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.table-pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.table-pagination-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  background-color: #ffffff;
+  color: #6b7280;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.table-pagination-btn:hover:not(:disabled) {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.table-pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.table-page-number {
+  min-width: 32px;
+  padding: 0;
+}
+
+.table-pagination-btn.active {
+  background-color: #1f2937;
+  border-color: #1f2937;
+  color: #ffffff;
+}
+
+.table-pagination-ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: #6b7280;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+/* Responsive Design - Mantener siempre en una línea */
+@media (max-width: 768px) {
+  .table-pagination-container {
+    gap: 6px;
+    padding: 0 4px;
+  }
+
+  .table-pagination-info {
+    font-size: 11px;
+    flex-shrink: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .table-pagination-controls {
+    gap: 1px;
+    flex-shrink: 0;
+  }
+
+  .table-pagination-btn {
+    min-width: 28px;
+    height: 28px;
+    padding: 0 6px;
+    font-size: 12px;
+  }
+
+  .table-page-number {
+    min-width: 28px;
+  }
+
+  .table-pagination-ellipsis {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-pagination-container {
+    gap: 8px;
+    padding: 0 2px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .table-pagination-info {
+    font-size: 10px;
+    flex-shrink: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .table-pagination-controls {
+    gap: 0px;
+    flex-shrink: 0;
+  }
+
+  .table-pagination-btn {
+    min-width: 24px;
+    height: 24px;
+    padding: 0 4px;
+    font-size: 11px;
+    border-radius: 3px;
+  }
+
+  .table-page-number {
+    min-width: 24px;
+  }
+
+  .table-pagination-ellipsis {
+    width: 24px;
+    height: 24px;
+    font-size: 11px;
+  }
+
+  /* Textos más cortos para botones de navegación */
+  .table-pagination-first span,
+  .table-pagination-last span,
+  .table-pagination-prev span,
+  .table-pagination-next span {
+    font-size: 10px;
+  }
+}
+
+/* Versión muy compacta para pantallas extremadamente pequeñas */
+@media (max-width: 320px) {
+  .table-pagination-info {
+    font-size: 9px;
+    flex-shrink: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .table-pagination-btn {
+    min-width: 20px;
+    height: 20px;
+    padding: 0 2px;
+    font-size: 10px;
+  }
+
+  .table-page-number {
+    min-width: 20px;
+  }
+
+  .table-pagination-ellipsis {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+}
+
+/* Remover clases que ocultan elementos */

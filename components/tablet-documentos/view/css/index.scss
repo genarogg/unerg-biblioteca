@@ -1,0 +1,24 @@
+.table-management-container {
+
+  --sb-track-color: #ffffff;
+  --sb-thumb-color: #f1f5f9;
+  --sb-size: 8px;
+
+  * {
+    // border: 1px solid red;
+    &::-webkit-scrollbar {
+      width: var(--sb-size);
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--sb-track-color);
+      border-radius: 19px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--sb-thumb-color);
+      // border-radius: 19px;
+      border: 1px solid #1f2937;
+    }
+  }
+}

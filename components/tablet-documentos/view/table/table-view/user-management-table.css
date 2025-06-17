@@ -71,8 +71,8 @@
 /* Ensure the actions column has enough width */
 .data-table th.acciones-column,
 .data-table td.acciones-column {
-  width: 300px; /* Aumentado para acomodar el switch */
-  min-width: 300px;
+  width: 240px; /* Increased fixed width to ensure enough space */
+  min-width: 240px;
   /* Important: Override overflow for the actions column */
   overflow: visible !important;
   position: relative;
@@ -91,7 +91,7 @@
 }
 
 .data-table th {
-  background-color: #f1f5f9;
+  background-color: rgb(180, 180, 180);
   padding: 18px 12px;
   text-align: left;
   font-weight: 600;
@@ -255,16 +255,4 @@
     /* Aumentar aún más el margen en pantallas muy pequeñas */
     margin-bottom: 180px;
   }
-}
-
-/* Agregar al final del archivo */
-.status-switch-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 60px;
-}
-
-.actions-cell .status-switch-container {
-  margin-right: 8px;
 }
