@@ -29,7 +29,7 @@ export default function TableFooter() {
     if (!bulkBarRef.current) return
 
     // Buscar el contenedor de la tabla
-    const tableContainer = document.querySelector(".table-management-container") as HTMLElement
+    const tableContainer = document.querySelector(".table-management-container") as HTMLDivElement
     if (!tableContainer) return
 
     const containerRect = tableContainer.getBoundingClientRect()
@@ -71,7 +71,7 @@ export default function TableFooter() {
 
   // Asegurar que el contenedor tenga la referencia correcta
   useEffect(() => {
-    const tableContainer = document.querySelector(".table-management-container") as HTMLElement
+    const tableContainer = document.querySelector(".table-management-container") as HTMLDivElement
     if (tableContainer) {
       containerRef.current = tableContainer
     }
@@ -146,8 +146,8 @@ export default function TableFooter() {
 
     const confirmed = window.confirm(
       `⚠️ ATENCIÓN: Esta acción eliminará permanentemente ${selectedItems.length} usuario(s).\n\n` +
-        `Usuarios que serán eliminados:\n${selectedItems.map((item) => `• ${item.nombre} (${item.correo})`).join("\n")}\n\n` +
-        `Esta acción NO se puede deshacer. ¿Estás completamente seguro?`,
+      `Usuarios que serán eliminados:\n${selectedItems.map((item) => `• ${item.nombre} (${item.correo})`).join("\n")}\n\n` +
+      `Esta acción NO se puede deshacer. ¿Estás completamente seguro?`,
     )
 
     if (confirmed) {
