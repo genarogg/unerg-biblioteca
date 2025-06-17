@@ -80,7 +80,7 @@ export default function TableView() {
                         <td key={column.id} className="acciones-column">
                           <ActionsColumn
                             item={item}
-                            onViewReport={handleView}
+                            // onViewReport={handleView}
                             onEdit={handleEdit}
                             onUpdateItem={tableState.updateItem}
                             showEstadoSelect={true}
@@ -97,7 +97,7 @@ export default function TableView() {
                         {column.id === "lineaInvestigacion" && (
                           <BadgeWrapper type="lineaInvestigacion" value={item.lineaInvestigacion} />
                         )}
-                        {column.id === "estado" && <BadgeWrapper type="estado" value={item.estado} />}
+                        {column.id === "estado" && <BadgeWrapper type="status" value={item.estado} />}
                         {column.id !== "titulo" &&
                           column.id !== "autor" &&
                           column.id !== "lineaInvestigacion" &&
