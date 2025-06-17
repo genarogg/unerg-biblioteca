@@ -439,7 +439,7 @@ export const TableProvider: React.FC<TableProviderProps> = ({ children }) => {
 
   // Funciones de datos
   const addItem = (newItem: DataTable) => {
-    setItems((prev) => [...prev, newItem])
+    setItems((prev) => [...prev, newItem].reverse())
   }
 
   const updateItem = (itemId: number, updatedItem: Partial<DataTable>) => {

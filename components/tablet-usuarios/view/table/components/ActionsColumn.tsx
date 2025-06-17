@@ -41,12 +41,12 @@ export default function ActionsColumn({
   showStatusSwitch = false,
   variant = "table",
   visibleActions = {
-    duplicate: true,
+    duplicate: false,
     edit: true,
-    view: true,
-    delete: true,
-    report: true,
-    whatsapp: true,
+    view: false,
+    delete: false,
+    report: false,
+    whatsapp: false,
   },
 }: ActionsColumnProps) {
   const baseClass = variant === "table" ? "actions-cell" : "card-actions"
@@ -105,12 +105,13 @@ export default function ActionsColumn({
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="ADMIN_DACE">Admin DACE</SelectItem>
-            <SelectItem value="ADMIN_FUNDESUR">Admin FUNDESUR</SelectItem>
-            <SelectItem value="SUPER_USUARIO">Super Usuario</SelectItem>
+            <SelectItem value="estudiante">Estudiante</SelectItem>
+            <SelectItem value="editor">Editor</SelectItem>
+            <SelectItem value="super">Super</SelectItem>
           </SelectContent>
         </Select>
       )}
+
 
       {/* Botones de acción */}
       <div className="action-buttons-container">

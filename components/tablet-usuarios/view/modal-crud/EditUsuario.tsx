@@ -25,12 +25,15 @@ interface EditUsuarioProps {
 const EditUsuario: React.FC<EditUsuarioProps> = ({ user }) => {
   const { updateItem } = useTableState()
 
+  console.log(user.status)
+
   // Inicializar el formulario con los datos del usuario
   const [formData, setFormData] = useState({
     nombre: user.nombre || "",
     correo: user.correo || "",
     cedula: user.cedula || "",
     rol: user.rol || "estudiante",
+    status: user.status || "ACTIVO",
   })
 
   const [errors, setErrors] = useState({
@@ -46,6 +49,7 @@ const EditUsuario: React.FC<EditUsuarioProps> = ({ user }) => {
       correo: user.correo || "",
       cedula: user.cedula || "",
       rol: user.rol || "estudiante",
+      status: user.status || "ACTIVO",
     })
   }, [user])
 
@@ -105,6 +109,7 @@ const EditUsuario: React.FC<EditUsuarioProps> = ({ user }) => {
       correo: formData.correo.trim(),
       cedula: formData.cedula.trim(),
       rol: formData.rol,
+      status: formData.status || "ACTIVO",
     }
 
     // Actualizar en la tabla
@@ -127,7 +132,7 @@ const EditUsuario: React.FC<EditUsuarioProps> = ({ user }) => {
             <Input
               name="nombre"
               type="text"
-              placeholder="Ingrese el nombre completo"
+              placeholder="nombre del usuario"
               required
               onChange={handleChange}
               error={errors.nombre}
@@ -139,7 +144,7 @@ const EditUsuario: React.FC<EditUsuarioProps> = ({ user }) => {
             <Input
               name="correo"
               type="email"
-              placeholder="ejemplo@correo.com"
+              placeholder="correo del usuario"
               required
               onChange={handleChange}
               error={errors.correo}
@@ -151,7 +156,7 @@ const EditUsuario: React.FC<EditUsuarioProps> = ({ user }) => {
             <Input
               name="cedula"
               type="text"
-              placeholder="12345678"
+              placeholder="cedula del usuario"
               required
               onChange={handleChange}
               error={errors.cedula}
@@ -183,6 +188,38 @@ const EditUsuario: React.FC<EditUsuarioProps> = ({ user }) => {
                 <SelectItem value="estudiante">Estudiante</SelectItem>
                 <SelectItem value="editor">Editor</SelectItem>
                 <SelectItem value="super">Super</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          {/* Select para cambiar el estatus */}
+          <div style={{ marginBottom: "16px" }}>
+            <label
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "8px",
+                fontSize: "14px",
+                fontWeight: "500",
+                color: "#374151",
+              }}
+            >
+              <Shield size={16} style={{ marginRight: "8px" }} />
+              Estatus del usuario
+            </label>
+            <Select
+              value={formData.status || user.status || "ACTIVO"}
+              onValueChange={(value) =>
+                setFormData((prev) => ({ ...prev, status: Array.isArray(value) ? value[0] : value }))
+              }
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Seleccionar estatus" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectLabel>Estatus disponibles</SelectLabel>
+                <SelectSeparator />
+                <SelectItem value="ACTIVO">Activo</SelectItem>
+                <SelectItem value="INACTIVO">Inactivo</SelectItem>
               </SelectContent>
             </Select>
           </div>

@@ -31,7 +31,8 @@ const Header: React.FC<HeaderProps> = () => {
     const menuItems = [
         { href: "/", label: "Inicio" },
         { href: "/documentos", label: "Documentos" },
-        { href: "/login", label: "login" }
+        { href: "/login", label: "login" },
+        { href: "/dashboard", label: "Dashboard" },
     ];
 
     return (

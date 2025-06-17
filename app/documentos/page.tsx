@@ -93,12 +93,7 @@ export default function DocumentosPage() {
     return (
         <SimpleLayout>
             <main className={styles.mainContent}>
-                <header className={styles.pageHeader}>
-                    <h1 className={styles.pageTitle}>Biblioteca de Documentos</h1>
-                    <p className={styles.pageSubtitle}>
-                        Explora nuestra colección de {documentosEjemplo.length} documentos académicos y de investigación
-                    </p>
-                </header>
+                
 
                 <div className={styles.filtersSection}>
                     <div className={styles.filterGroup}>

@@ -3,7 +3,6 @@ interface DataTable {
   id: number
   nombre: string
   correo: string
-  telefono: string
   cedula: string
   rol: string
   [key: string]: any

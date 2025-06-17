@@ -42,8 +42,8 @@ const Header: React.FC<HeaderProps> = () => {
     }
     else {
         menuItems.push(
-            { href: "/documentos", label: "Documentos" },
-            { href: "/usuarios", label: "usuarios" },
+            { href: "/dashboard/documentos", label: "Documentos" },
+            { href: "/dashboard/usuarios", label: "usuarios" },
             { href: "/login", label: "login" },
         );
     }
